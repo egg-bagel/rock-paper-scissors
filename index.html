@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <p>Play in the console!</p>
+    <script>
+
+        //Randomly returns either "Rock," "Paper," or "Scissors."
+
+        function computerPlay() {
+            let randomNum = Math.random();
+            console.log(randomNum);
+
+            if (randomNum <= 0.33) {
+                return "rock";
+            }
+            else if ((randomNum) >= 0.34 && (randomNum <=0.66)) {
+                return "paper";
+            }
+            else if (randomNum >= 0.67) {
+                return "scissors";
+            }
+        }
+
+        //Takes the player's selection and the computer's selection.
+        //Outputs the winner for the round in the console.
+        //Returns a string identifying the winner.
+
+        function playRound(playerSelection, computerSelection) {
+            let wonThisRound = "";
+
+            if (playerSelection.toLowerCase() === "rock") {
+                if (computerSelection === "rock") {
+                    console.log("It's a draw! Rock vs. Rock");
+                    wonThisRound = "draw";
+                }
+                else if (computerSelection === "paper") {
+                    console.log("You lose! Paper beats Rock");
+                    wonThisRound = "computer";
+                }
+                else if (computerSelection === "scissors") {
+                    console.log("You win! Rock beats Scissors");
+                    wonThisRound = "player";
+                }
+            }
+            else if (playerSelection.toLowerCase() === "paper") {
+                if (computerSelection === "rock") {
+                    console.log("You win! Paper beats Rock");
+                    wonThisRound = "player";
+                }
+                else if (computerSelection === "paper") {
+                    console.log("It's a draw! Paper vs. Paper");
+                    wonThisRound = "draw";
+                }
+                else if (computerSelection === "scissors") {
+                    console.log("You lose! Scissors beat Paper");
+                    wonThisRound = "computer";
+                }
+            }
+            else if (playerSelection.toLowerCase() === "scissors") {
+                if (computerSelection === "rock") {
+                    console.log("You lose! Rock beats Scissors");
+                    wonThisRound = "computer";
+                }
+                else if (computerSelection === "paper") {
+                    console.log("You win! Scissors beat Paper");
+                    wonThisRound = "player";
+                }
+                else if (computerSelection === "scissors") {
+                    console.log("It's a draw! Scissors vs. Scissors");
+                    wonThisRound = "draw";
+                }
+            }
+            else {
+                console.log("Invalid input!");
+                return null;
+            }
+
+            return wonThisRound;
+        }
+
+        function game() {
+            let roundCount = 0;
+            let playerScore = 0;
+            let computerScore = 0;
+            let drawScore = 0;
+
+            while (roundCount < 5) {
+                alert(`ROUND ${roundCount + 1}`);
+                let playerChoice = prompt("Please enter your choice: rock, paper, or scissors.");
+                let computerChoice = computerPlay();
+                let roundResult = playRound(playerChoice, computerChoice);
+
+                if (roundResult === "draw") {
+                    drawScore++;
+                }
+                else if (roundResult === "player") {
+                    playerScore++;
+                }
+                else if (roundResult === "computer") {
+                    computerScore++;
+                }
+                else {continue;}
+
+                console.log(`SCORE: Player ${playerScore}, Computer ${computerScore}, draws ${drawScore}`);
+
+                roundCount++;
+            }
+
+            if (playerScore > computerScore) {
+                console.log("Congratulations! You won this game.");
+            }
+            else if (computerScore > playerScore) {
+                console.log("The computer won this game. Better luck next time!");
+            }
+            else if (playerScore === computerScore) {
+                console.log("This game ended in a draw.");
+            }
+
+        }
+
+    </script>
+</body>
+</html>
